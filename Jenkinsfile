@@ -30,6 +30,12 @@ pipeline {
         }
 
         stage('Run Tests') {
+            when {
+                expression {
+                    // Check if test directory exists
+                    fileExists('tests') || fileExists('test') || fileExists('spec') || fileExists('src/__tests__')
+                }
+            }
             steps {
                 sh 'npm test'
             }
