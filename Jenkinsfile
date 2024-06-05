@@ -42,9 +42,9 @@ pipeline {
             steps {
                 script {
                     // Anchore scan example
-                    sh 'anchore-cli image add ${DOCKER_IMAGE}'
-                    sh 'anchore-cli image wait ${DOCKER_IMAGE}'
-                    sh 'anchore-cli image vuln ${DOCKER_IMAGE} all'
+                    sh "anchore-cli image add ${DOCKER_IMAGE}"
+                    sh "anchore-cli image wait ${DOCKER_IMAGE}"
+                    sh "anchore-cli image vuln ${DOCKER_IMAGE} all"
                 }
             }
         }
@@ -52,7 +52,7 @@ pipeline {
         stage('DAST') {
             steps {
                 // OWASP ZAP scan example
-                zapAttack(target: 'http://localhost:3000', format: 'html', output: 'zap-report.html')
+                sh 'zap-baseline.py -t http://localhost:3000 -r zap-report.html'
             }
         }
 
@@ -64,7 +64,7 @@ pipeline {
                 }
             }
         }
-
+    }
 
     post {
         always {
@@ -72,3 +72,4 @@ pipeline {
             junit 'reports/**/*.xml'
         }
     }
+}
