@@ -72,5 +72,3 @@ pipeline {
             junit 'reports/**/*.xml'
         }
     }
-}
-}
