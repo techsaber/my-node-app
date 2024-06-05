@@ -65,12 +65,6 @@ pipeline {
             }
         }
 
-        stage('Post-deployment Tests') {
-            steps {
-                // Integration tests or additional security tests
-            }
-        }
-    }
 
     post {
         always {
