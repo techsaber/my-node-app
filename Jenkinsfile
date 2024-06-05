@@ -69,7 +69,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'reports/*, zap-report.html', allowEmptyArchive: true
-            junit 'reports/**/*.xml'
+            junit '**/test-reports/*.xml' // Change this to match your test report file path
         }
     }
 }
